@@ -1,12 +1,23 @@
 {
     "version": 2,
     "framework": null,
+    "buildCommand": "",
+    "outputDirectory": "public",
+    "installCommand": "composer install --no-dev --optimize-autoloader",
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.1"
         }
     },
     "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/(css|js|images|fonts|favicon.ico)(.*)",
+            "dest": "/public/$1$2"
+        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
