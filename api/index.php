@@ -43,10 +43,13 @@ if (!is_dir($_ENV['APP_STORAGE'] . '/logs')) {
     mkdir($_ENV['APP_STORAGE'] . '/logs', 0755, true);
 }
 
+
 // Handle Request
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 $request = Illuminate\Http\Request::capture();
-$response = $app->handleRequest($request);
+$response = $kernel->handle($request);
 
 $response->send();
 
-$app->terminate();
+$kernel->terminate($request, $response);
+
