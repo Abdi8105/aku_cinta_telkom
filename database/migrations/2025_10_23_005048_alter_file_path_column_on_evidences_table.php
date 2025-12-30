@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
+    public $withinTransaction = false;
+
     /**
      * Jalankan migrasi.
      */
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::table('evidences', function (Blueprint $table) {
             // Mengubah tipe kolom dari STRING menjadi TEXT
             // TEXT dapat menampung hingga 65,535 karakter, cukup untuk JSON files
-            $table->text('file_path')->change(); 
+            $table->text('file_path')->change();
 
             // ATAU, jika database Anda mendukungnya (MySQL 5.7+ / PostgreSQL)
             // $table->json('file_path')->change(); 
